@@ -1,0 +1,71 @@
+---
+    Data Source=(LocalDB)\v11.0;
+    AttachDbFilename=D:\TEST\BL_WCF_WS_Factory\BL_WCF_WS_Factory\App_Data\NORTHWND.MDF;
+    Integrated Security=True;Connect Timeout=30
+
+    Provider=Microsoft.ACE.OLEDB.12.0;
+    Data Source=D:\TEST\BL_WCF_WS_Factory\BL_WCF_WS_Factory\App_Data\NORTHWND.accdb;
+    Persist Security Info=False
+---    
+http://localhost:1086/EmployeeService.svc/GetAll
+
+http://localhost:1086/EmployeeService.svc/1
+
+http://localhost:1086/EmployeeService.svc/1/1   --> MSSQL, 1
+http://localhost:1086/EmployeeService.svc/2/5   --> ACCESS, 5
+
+PUT http://localhost:1086/EmployeeService.svc
+Content-Type: Application/json
+accept: Application/json
+
+{
+   "FirstName": "Nancy",
+   "LastName": "Davolio",
+   "Title": "Sales Representative-updated",
+   "Address": "507 - 20th Ave. E.\r\nApt. 2A",
+   "BirthDate": "/Date(-664732800000-0800)/",
+   "City": "Seattle",
+   "Country": "USA",
+   "EmployeeID": 1,
+   "Extension": "5467",
+   "HireDate": "/Date(704703600000-0700)/",
+   "HomePhone": "(206) 555-9857",
+   "PostalCode": "98122",
+   "Region": "WA",
+   "Notes": "",
+   "ReportsTo": 2
+}
+
+===============
+HTTP/1.1 200 OK
+Cache-Control: private
+Content-Type: application/xml; charset=utf-8
+Server: Microsoft-IIS/8.0
+X-AspNet-Version: 4.0.30319
+X-SourceFiles: =?UTF-8?B?RDpcVEVTVFxCTF9XQ0ZfV1NfRmFjdG9yeVxCTF9XQ0ZfV1NfRmFjdG9yeVxFbXBsb3llZVNlcnZpY2Uuc3ZjXDE=?=
+X-Powered-By: ASP.NET
+Date: Mon, 07 Aug 2017 19:32:03 GMT
+Content-Length: 581
+
+<VmEmployee xmlns="http://schemas.datacontract.org/2004/07/BL_WCF_WS_Factory.ViewModel" xmlns:i="http://www.w3.org/2001/XMLSchema-instance"><Address>507 - 20th Ave. E.&#xD;
+Apt. 2A</Address><BirthDate>1948-12-08T00:00:00</BirthDate><City>Seattle</City><Country>USA</Country><EmployeeID>1</EmployeeID><Extension>5467</Extension><FirstName>Nancy</FirstName><HireDate>1992-05-01T00:00:00</HireDate><HomePhone>(206) 555-9857</HomePhone><LastName>Davolio</LastName><PostalCode>98122</PostalCode><Region>WA</Region><ReportsTo>2</ReportsTo><Title>Sales Representative</Title></VmEmployee>
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<VmEmployee xmlns="http://schemas.datacontract.org/2004/07/BL_WCF_WS_Factory.ViewModel" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+   <Address>507 - 20th Ave. E.&amp;#xD;Apt. 2A</Address>
+   <BirthDate>1948-12-08T00:00:00</BirthDate>
+   <City>Seattle</City>
+   <Country>USA</Country>
+   <EmployeeID>1</EmployeeID>
+   <Extension>5467</Extension>
+   <FirstName>Nancy</FirstName>
+   <HireDate>1992-05-01T00:00:00</HireDate>
+   <HomePhone>(206) 555-9857</HomePhone>
+   <LastName>Davolio</LastName>
+   <PostalCode>98122</PostalCode>
+   <Region>WA</Region>
+   <ReportsTo>2</ReportsTo>
+   <Title>Sales Representative</Title>
+</VmEmployee>
+---
+{"Address":"507 - 20th Ave. E.\u000d\u000aApt. 2A","BirthDate":"\/Date(-664732800000-0800)\/","City":"Seattle","Country":"USA","EmployeeID":1,"Extension":"5467","FirstName":"Nancy","HireDate":"\/Date(704703600000-0700)\/","HomePhone":"(206) 555-9857","LastName":"Davolio","PostalCode":"98122","Region":"WA","ReportsTo":2,"Title":"Sales Representative"}
